@@ -1,0 +1,28 @@
+  <!-- <style> -->
+  <container>
+    <h1>Estas son las peliculas disponibles apra este fin de semana</h1>
+    <row>
+      {% for movie_title, info in data.items() %}
+      <columns small="12" medium="4">
+          <callout class="primary">
+            <h4 class="text-center">{{movie_title}}</h4>
+            {% if info['popularity'] != 'Not found' %}
+            <small class="text-center">Popularidad: {{info['popularity']}}, Puntuación: {{info['vote_average']}}</small>
+            {%endif%}
+            <h5>Funciones:</h5>
+            {%for weekday, hours in info['functions'].items() %}
+            <small class="text-center">{{weekday}}: {{ hours|join(', ') }}</small>
+            {% endfor %}
+            <h5 class="text-center">Resumen</h5>
+            {% if info['overviews']['movie db'] != 'Not found' or info['overviews']['movie db'] == ''%}
+              <p>{{ info['overviews']['movie db']}}</p>
+            {% else %}
+            <p>{{info['overviews']['Movie db']}}</p>
+            {% endif %}
+            {{info['overviews']['Cines unidos']}}
+          </callout>
+      </columns>
+      {% endfor %}     
+    </row>
+  </container>
+

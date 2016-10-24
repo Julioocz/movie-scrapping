@@ -1,0 +1,12 @@
+Estas son las peliculas disponibles para este fin de semana.
+{# The template needed to be this ugly beacuse this is a txt file #}
+{% for movie_title, info in data.items() %}
+{{ movie_title }}:{% if info['popularity'] != 'Not found' %}
+Popularidad: {{info['popularity']}}, Puntuación: {{info['vote_average']}}{% endif %}
+Enlace a cines unidos: {{info['url']|replace(' ', '%20')}}
+Funciones:{%for weekday, hours in info['functions'].items() %}
+{{weekday}}: {{ hours|join(', ') }}{% endfor %}
+{% for resource, overview in info['overviews'].items() %}{% if overview != "Not found" or overview == ''%}
+{{ resource|capitalize }}: {{overview}}{% endif %}{% endfor %}
+{% endfor %}     
+    
